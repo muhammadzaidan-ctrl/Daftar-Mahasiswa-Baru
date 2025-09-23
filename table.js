@@ -275,7 +275,7 @@ ${genderIcon} Nama Lengkap: ${nama}
 
 === ℹ️ INFORMASI TAMBAHAN ===
 • Status: Mahasiswa Baru 2025
-• Tahun Lulus SMA: 2024
+• Tahun Lulus SMA: 2025
 • Tahun Masuk Kuliah: 2025
 • Kategori: ${gender}
 • Regional: ${getRegionalInfo(universitas)}
