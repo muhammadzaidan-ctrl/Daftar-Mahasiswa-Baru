@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="table.css">
+    <title>Daftar MABA 2025</title>
+</head>
+<body>
+    <!-- Login Popup -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-popup">
+            <button class="close-popup" onclick="closeLogin()">&times;</button>
+            <h2>Login Required</h2>
+            <p>Anak luminare atau IOS nihhhh... Login sesuai panduan ya gess...</p>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username" required>
+                </div>
+    <!-- Detail Popup Mahasiswa -->
+    <div class="detail-overlay" id="detailOverlay" style="display:none;">
+        <div class="detail-popup">
+            <button class="close-detail" onclick="closeDetailPopup()">&times;</button>
+            <img id="detailFoto" src="" alt="Foto Mahasiswa" class="detail-foto">
+            <div id="detailInfo"></div>
+        </div>
+    </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                </div>
+                
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password" onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">Login</span>
+                </button>
+            </form>
+            
+            <div class="social-login">
+                <p>Atau login dengan</p>
+                <div class="social-buttons">
+                    <button class="social-btn google" onclick="socialLogin('google')">
+                        🔍 Google
+                    </button>
+                    <button class="social-btn facebook" onclick="socialLogin('facebook')">
+                        📘 Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <nav class="navigation">
+                <a href="#" onclick="navigateTo('home')">Home</a>
+                <a href="#" onclick="navigateTo('about')">About</a>
+                <a href="#" onclick="navigateTo('services')">Services</a>
+                <a href="#" onclick="navigateTo('contact')">Contact</a>
+                <button class="btnLogin-popup" onclick="logout()">Logout</button>
+            </nav>
+        </header>
+
+        <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="searchTable()">
+
+        <div class="table-container">
+            <table id="studentTable" border="5">
+                <caption><b>SMA BINA INSAN MANDIRI</b></caption>
+                <caption><b>Daftar Mahasiswa Baru 2025</b></caption>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Asal Sekolah</th>
+                        <th>Jurusan</th>
+                        <th>Universitas</th>
+                        <th>Profile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Adzkia Ar-rosyidah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Matematika Murni</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(1, 'Adzkia Ar-rosyidah', 'Matematika Murni', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Agustin Wulandari</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Manajemen Pemasaran</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(2, 'Agustin Wulandari', 'Manajemen Pemasaran', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Aisyah Nur Dzikriah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Bisnis Digital</td>
+                        <td>Politeknik Negeri Banyuwangi</td>
+                        <td><button onclick="showDetail(3, 'Aisyah Nur Dzikriah', 'Bisnis Digital', 'Politeknik Negeri Banyuwangi')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Alfiani Nur Izzaty</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Supervisor Jaminan Mutu Pangan</td>
+                        <td>Institut Pertanian Bogor</td>
+                        <td><button onclick="showDetail(4, 'Alfiani Nur Izzaty', 'Supervisor Jaminan Mutu Pangan', 'Institut Pertanian Bogor')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Alfiyah Zahrotul Jannah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Psikologi</td>
+                        <td>Universitas Muhammadiyah Surakarta</td>
+                        <td><button onclick="showDetail(5, 'Alfiyah Zahrotul Jannah', 'Psikologi', 'Universitas Muhammadiyah Surakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Alfia Khaira Mazeedah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(6, 'Alfia Khaira Mazeedah', '-', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Alifia Nurul Izzaty</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Agronomi</td>
+                        <td>Universitas Negeri Jember</td>
+                        <td><button onclick="showDetail(7, 'Alifia Nurul Izzaty', 'Agronomi', 'Universitas Negeri Jember')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Amatullah Fatimah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Diponegoro</td>
+                        <td><button onclick="showDetail(8, 'Amatullah Fatimah', '-', 'Universitas Diponegoro')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Dinar Habibatus Shofia</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Politeknik Kesehatan Malang</td>
+                        <td><button onclick="showDetail(9, 'Dinar Habibatus Shofia', '-', 'Politeknik Kesehatan Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Fajar Javier Rahimah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Manajemen Informatika</td>
+                        <td>Politeknik Negeri Jember</td>
+                        <td><button onclick="showDetail(10, 'Fajar Javier Rahimah', 'Manajemen Informatika', 'Politeknik Negeri Jember')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Ghaniyyah Nayla Azmi</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Islam Negeri Malang</td>
+                        <td><button onclick="showDetail(11, 'Ghaniyyah Nayla Azmi', '-', 'Universitas Islam Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Halimah Kiysa Fiktim</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Teknik Komputer</td>
+                        <td>Universitas Pendidikan Indonesia</td>
+                        <td><button onclick="showDetail(12, 'Halimah Kiysa Fiktim', 'Teknik Komputer', 'Universitas Pendidikan Indonesia')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>Hamidatul Fitriah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Gizi</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(13, 'Hamidatul Fitriah', 'Gizi', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>Hilma Fatin Fikriah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Politeknik Negeri Malang</td>
+                        <td><button onclick="showDetail(14, 'Hilma Fatin Fikriah', '-', 'Politeknik Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>Hilma Nadaul Hasanah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Pendidikan Biologi</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(15, 'Hilma Nadaul Hasanah', 'Pendidikan Biologi', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>Humairoh Azzahra</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Teknologi Hasil Pertanian</td>
+                        <td>Universitas Mulawarman</td>
+                        <td><button onclick="showDetail(16, 'Humairoh Azzahra', 'Teknologi Hasil Pertanian', 'Universitas Mulawarman')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>Kamila Fatin Hamizah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>PGPAUD</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(17, 'Kamila Fatin Hamizah', 'PGPAUD', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>Khadijah Inten Ayu Daffa</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Pendidikan Bahasa Indonesia</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(18, 'Khadijah Inten Ayu Daffa', 'Pendidikan Bahasa Indonesia', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td>Leilani Nadia Salsabila</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Kimia</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(19, 'Leilani Nadia Salsabila', 'Kimia', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>Luluk Mukhibbatur</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(20, 'Luluk Mukhibbatur', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>Maulida Nahdliyah Tsaqifah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>IPA</td>
+                        <td>Universitas Trunojoyo</td>
+                        <td><button onclick="showDetail(21, 'Maulida Nahdliyah Tsaqifah', 'IPA', 'Universitas Trunojoyo')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>Meida Nugraheni Puji Rahayu</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Arogapoppin</td>
+                        <td><button onclick="showDetail(22, 'Meida Nugraheni Puji Rahayu', '-', 'Arogapoppin')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>Muthia Romadhona Nidaul haq</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Gizi</td>
+                        <td>Politeknik Kesehatan Negeri Malang</td>
+                        <td><button onclick="showDetail(23, 'Muthia Romadhona Nidaul haq', 'Gizi', 'Politeknik Kesehatan Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>Muthiah Sabila haq</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>TKG</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(24, 'Muthiah Sabila haq', 'TKG', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>Mutiara Nur laili</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Islam Negeri Kudus</td>
+                        <td><button onclick="showDetail(25, 'Mutiara Nur laili', '-', 'Universitas Islam Negeri Kudus')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>Nabila Lualai</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Desain Interior</td>
+                        <td>Institut Teknologi Surabaya</td>
+                        <td><button onclick="showDetail(26, 'Nabila Lualai', 'Desain Interior', 'Institut Teknologi Surabaya')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td>Nada Raihani Adn</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Kebidanan</td>
+                        <td>Universitas Negeri Surakarta</td>
+                        <td><button onclick="showDetail(27, 'Nada Raihani Adn', 'Kebidanan', 'Universitas Negeri Surakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>Nadia Zakiyah Rahmah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Manajemen</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(28, 'Nadia Zakiyah Rahmah', 'Manajemen', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>Nadzifah Irawan</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Manajemen Bisnis</td>
+                        <td>STEI Hamfara</td>
+                        <td><button onclick="showDetail(29, 'Nadzifah Irawan', 'Manajemen Bisnis', 'STEI Hamfara')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>Nanis Wahyu Pramadinah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Islam Negeri Surabaya</td>
+                        <td><button onclick="showDetail(30, 'Nanis Wahyu Pramadinah', '-', 'Universitas Islam Negeri Surabaya')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>Nazifah Salsabila</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Muhammadiyah Surakarta</td>
+                        <td><button onclick="showDetail(31, 'Nazifah Salsabila', '-', 'Universitas Muhammadiyah Surakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>Putri Fika Nur Fadliyah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Pendidikan Bahasa Inggris</td>
+                        <td>Universitas Islam Negeri Surabaya</td>
+                        <td><button onclick="showDetail(32, 'Putri Fika Nur Fadliyah', 'Pendidikan Bahasa Inggris', 'Universitas Islam Negeri Surabaya')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>Qisti Innayatullah Syam</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(33, 'Qisti Innayatullah Syam', '-', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td>Raudhatul Jannah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Mulawarman</td>
+                        <td><button onclick="showDetail(34, 'Raudhatul Jannah', '-', 'Universitas Mulawarman')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td>Rifa Zahra Akhlisa Hasan</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Teknik Jakarta</td>
+                        <td><button onclick="showDetail(35, 'Rifa Zahra Akhlisa Hasan', '-', 'Universitas Teknik Jakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td>Rifqi Naila Ulumiyah</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Islam Negeri Surabaya</td>
+                        <td><button onclick="showDetail(36, 'Rifqi Naila Ulumiyah', '-', 'Universitas Islam Negeri Surabaya')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>37</td>
+                        <td>Rinda Nia Malika</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Bisnis Digital</td>
+                        <td>Politeknik Banjarmasin</td>
+                        <td><button onclick="showDetail(37, 'Rinda Nia Malika', 'Bisnis Digital', 'Politeknik Banjarmasin')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td>Sajida Zahia farin</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Politeknik Media</td>
+                        <td><button onclick="showDetail(38, 'Sajida Zahia farin', '-', 'Politeknik Media')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td>Salsabila Sayla Ramadhana</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Negeri Yogyakarta</td>
+                        <td><button onclick="showDetail(39, 'Salsabila Sayla Ramadhana', '-', 'Universitas Negeri Yogyakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td>Syarifatu Aliya</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Trunojoyo Madura</td>
+                        <td><button onclick="showDetail(40, 'Syarifatu Aliya', '-', 'Universitas Trunojoyo Madura')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>41</td>
+                        <td>Tsabita Anisa Fawwaz</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Gizi</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(41, 'Tsabita Anisa Fawwaz', 'Gizi', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>42</td>
+                        <td>Samrotul Maghfiroh</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Negeri Malang</td>
+                        <td><button onclick="showDetail(42, 'Samrotul Maghfiroh', '-', 'Universitas Negeri Malang')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>43</td>
+                        <td>Yumna Hanifah Nafisa Puspo Negoro</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Muhammadiyah Surakarta</td>
+                        <td><button onclick="showDetail(43, 'Yumna Hanifah Nafisa Puspo Negoro', '-', 'Universitas Muhammadiyah Surakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>44</td>
+                        <td>Zahra Prawesti Nugraha</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>Universitas Airlangga</td>
+                        <td><button onclick="showDetail(44, 'Zahra Prawesti Nugraha', '-', 'Universitas Airlangga')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>45</td>
+                        <td>Abdul Adhim</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>Komunikasi & penyiaran islam</td>
+                        <td>Universitas Islam Negeri Jakarta</td>
+                        <td><button onclick="showDetail(45, 'Abdul Adhim', 'Komunikasi & penyiaran islam', 'Universitas Islam Negeri Jakarta')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>46</td>
+                        <td>Akhmad Alfan Khoirul Rijal</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(46, 'Akhmad Alfan Khoirul Rijal', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>47</td>
+                        <td>Ammar Hafiz Rafi Syahputra</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(47, 'Ammar Hafiz Rafi Syahputra', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>48</td>
+                        <td>Avisenna Khalifa Ahmad</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(48, 'Avisenna Khalifa Ahmad', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>49</td>
+                        <td>Bilal Akbar Mujahid</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(49, 'Bilal Akbar Mujahid', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>Fauzi Romadhoni</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Fauzi Romadhoni', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>51</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>52</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>53</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>54</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>55</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>56</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>57</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>58</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>59</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>60</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>61</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>62</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>63</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>64</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>65</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>66</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>67</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>68</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>69</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr><tr>
+                        <td>70</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>71</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>72</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>73</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>74</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>75</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>76</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>77</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>78</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>79</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>80</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>81</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>82</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>83</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>84</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>85</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>86</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                    <tr>
+                        <td>87</td>
+                        <td>Juliansyah Aditya Al-Faris</td>
+                        <td>SMA Bina Insan Mandiri</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><button onclick="showDetail(50, 'Juliansyah Aditya Al-Faris', '-', '-')">Detail</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="table.js"></script>
+<style>
+    .detail-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.7); z-index: 2000;
+        display: flex; align-items: center; justify-content: center;
+        transition: opacity 0.3s;
+    }
+    .detail-popup {
+        background: #fff; border-radius: 20px; padding: 32px 24px; min-width: 320px; max-width: 90vw;
+        box-shadow: 0 8px 32px rgba(31,38,135,0.37); text-align: center; position: relative;
+        animation: zoomInTable 0.5s cubic-bezier(0.23,1,0.32,1);
+    }
+    .detail-foto {
+        width: 120px; height: 120px; object-fit: cover; border-radius: 50%; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(52,152,219,0.2);
+    }
+    .close-detail {
+        position: absolute; top: 12px; right: 18px; background: none; border: none; font-size: 28px; color: #888; cursor: pointer;
+        transition: color 0.2s;
+    }
+    .close-detail:hover { color: #e74c3c; }
+    #detailInfo { text-align: left; margin: 0 auto; max-width: 320px; font-size: 16px; color: #222; }
+</style>
+</body>
+</html>
