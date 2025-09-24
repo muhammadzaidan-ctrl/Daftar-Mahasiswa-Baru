@@ -14,6 +14,10 @@ const mahasiswaDetails = [
         foto: "adzkia.png"
     }
     // Tambahkan data lain di sini
+
+
+
+
 ];
 function handleLogin(event) {
     event.preventDefault();
@@ -53,7 +57,7 @@ function handleLogin(event) {
         } else {
             // Error
             btnText.innerHTML = 'Login Failed';
-            alert('Username atau password salah! harus sesuai ketentuan yang sudah diberikan yaaa...');
+            alert('Username atau password salah! harus sesuai ketentuan yang sudah diberikan yaaa...\n\nJika ada kendala bisa langsung hubungi pemberi link web');
             
             setTimeout(() => {
                 btnText.innerHTML = 'Login';
@@ -84,7 +88,7 @@ function closeLogin() {
 }
 
 function socialLogin(provider) {
-    alert(`Login dengan ${provider} akan segera tersedia!\n\nUntuk saat ini gunakan kredential berikut:\n• admin / admin123\n• luminare / luminare2025`);
+    alert(`Login dengan ${provider} akan segera tersedia!\n\nUntuk saat ini gunakan kredential yang sudah diberikan oleh pemberi link yaa`);
 }
 
 function forgotPassword() {
