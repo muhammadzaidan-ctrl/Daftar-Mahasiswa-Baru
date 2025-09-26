@@ -29,11 +29,9 @@ function handleLogin(event) {
     
     // Simple validation (you can customize these credentials)
     const validCredentials = [
-        {username: 'admin', password: 'admin123'},
-        {username: 'student', password: 'student123'},
-        {username: 'teacher', password: 'teacher123'},
-        {username: 'luminare', password: 'luminare2025'},
-        {username: 'ios', password: 'ios2025'}
+        {username: 'Admin', password: 'Admin201224'},
+        {username: 'Luminare', password: 'LuminareX'},
+        {username: 'IOS', password: 'IOSX'}
     ];
     
     // Add loading animation
@@ -82,7 +80,7 @@ function togglePassword() {
 
 function closeLogin() {
     // Allow closing but show warning
-    if (confirm('Anda yakin ingin keluar? Anda perlu login untuk mengakses data mahasiswa.')) {
+    if (confirm('Anda yakin ingin keluar? Anda perlu login untuk mengakses data Mahasiswa.')) {
         window.close();
     }
 }
