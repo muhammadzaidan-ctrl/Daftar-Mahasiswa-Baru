@@ -1,705 +1,218 @@
-function closeDetailPopup() {
-    document.getElementById('detailOverlay').style.display = 'none';
-}
-// Login functionality
-// Data detail per mahasiswa
-const mahasiswaDetails = [
-    {
-        no: 1,
-        nama: "Adzkia Ar-rosyidah",
-        jurusan: "Matematika Murni",
-        universitas: "Universitas Airlangga",
-        prestasi: "Juara Olimpiade Matematika",
-        kontak: "08xxxxxxxxx",
-        foto: "adzkia.png"
-    }
-    // Tambahkan data lain di sini
-
-
-
-
+// Data Mahasiswa Lengkap (87 Siswa)
+const studentsData = [
+    {no: 1, nama: "Adzkia Ar-rosyidah", asal: "SMA Bina Insan Mandiri", jurusan: "Matematika Murni", universitas: "Universitas Airlangga"},
+    {no: 2, nama: "Agustin Wulandari", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen Pemasaran", universitas: "Universitas Negeri Malang"},
+    {no: 3, nama: "Aisyah Nur Dzikriah", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Politeknik Negeri Banyuwangi"},
+    {no: 4, nama: "Alfiani Nur Izzaty", asal: "SMA Bina Insan Mandiri", jurusan: "Supervisor Jaminan Mutu Pangan", universitas: "Institut Pertanian Bogor"},
+    {no: 5, nama: "Alfiyah Zahrotul Jannah", asal: "SMA Bina Insan Mandiri", jurusan: "Psikologi", universitas: "Universitas Muhammadiyah Surakarta"},
+    {no: 6, nama: "Alfia Khaira Mazeedah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Airlangga"},
+    {no: 7, nama: "Alifia Nurul Izzaty", asal: "SMA Bina Insan Mandiri", jurusan: "Agronomi", universitas: "Universitas Negeri Jember"},
+    {no: 8, nama: "Amatullah Fatimah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Diponegoro"},
+    {no: 9, nama: "Dinar Habibatus Shofia", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Politeknik Kesehatan Malang"},
+    {no: 10, nama: "Fajar Javier Rahimah", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen Informatika", universitas: "Politeknik Negeri Jember"},
+    {no: 11, nama: "Ghaniyyah Nayla Azmi", asal: "SMA Bina Insan Mandiri", jurusan: "PAI", universitas: "Universitas Islam Negeri Malang"},
+    {no: 12, nama: "Halimah Kiysa Fiktim", asal: "SMA Bina Insan Mandiri", jurusan: "Teknik Komputer", universitas: "Universitas Pendidikan Indonesia"},
+    {no: 13, nama: "Hamidatul Fitriah", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
+    {no: 14, nama: "Hilma Fatin Fikriah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Negeri Malang"},
+    {no: 15, nama: "Hilma Nadaul Hasanah", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Biologi", universitas: "Universitas Negeri Malang"},
+    {no: 16, nama: "Humairoh Azzahra", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Hasil Pertanian", universitas: "Universitas Mulawarman"},
+    {no: 17, nama: "Kamila Fatin Hamizah", asal: "SMA Bina Insan Mandiri", jurusan: "PGPAUD", universitas: "Universitas Negeri Malang"},
+    {no: 18, nama: "Khadijah Inten Ayu Daffa", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Bahasa Indonesia", universitas: "Universitas Negeri Malang"},
+    {no: 19, nama: "Leilani Nadia Salsabila", asal: "SMA Bina Insan Mandiri", jurusan: "Kimia", universitas: "Universitas Negeri Malang"},
+    {no: 20, nama: "Luluk Mukhibbatur", asal: "SMA Bina Insan Mandiri", jurusan: "Kebidanan", universitas: "Politeknik Kesehatan Surabaya"},
+    {no: 21, nama: "Maulida Nahdliyah Tsaqifah", asal: "SMA Bina Insan Mandiri", jurusan: "IPA", universitas: "Universitas Trunojoyo"},
+    {no: 22, nama: "Meida Nugraheni Puji Rahayu", asal: "SMA Bina Insan Mandiri", jurusan: "Optik", universitas: "Arogapoppin"},
+    {no: 23, nama: "Muthia Romadhona Nidaul haq", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Politeknik Kesehatan Negeri Malang"},
+    {no: 24, nama: "Muthiah Sabila haq", asal: "SMA Bina Insan Mandiri", jurusan: "TKG", universitas: "Universitas Airlangga"},
+    {no: 25, nama: "Mutiara Nur laili", asal: "SMA Bina Insan Mandiri", jurusan: "PAI", universitas: "Universitas Islam Negeri Kudus"},
+    {no: 26, nama: "Nabila Lualai", asal: "SMA Bina Insan Mandiri", jurusan: "Desain Interior", universitas: "Institut Teknologi Surabaya"},
+    {no: 27, nama: "Nada Raihani Adn", asal: "SMA Bina Insan Mandiri", jurusan: "Kebidanan", universitas: "Universitas Negeri Surakarta"},
+    {no: 28, nama: "Nadia Zakiyah Rahmah", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen", universitas: "Universitas Negeri Malang"},
+    {no: 29, nama: "Nadzifah Irawan", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen Bisnis", universitas: "STEI Hamfara"},
+    {no: 30, nama: "Nanis Wahyu Pramadinah", asal: "SMA Bina Insan Mandiri", jurusan: "Konseling", universitas: "Universitas Islam Negeri Surabaya"},
+    {no: 31, nama: "Nazifah Salsabila", asal: "SMA Bina Insan Mandiri", jurusan: "Sastra Indonesia", universitas: "Universitas Muhammadiyah Surakarta"},
+    {no: 32, nama: "Putri Fika Nur Fadliyah", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Bahasa Inggris", universitas: "Universitas Islam Negeri Surabaya"},
+    {no: 33, nama: "Qisti Innayatullah Syam", asal: "SMA Bina Insan Mandiri", jurusan: "Bioteknologi", universitas: "Universitas Negeri Malang"},
+    {no: 34, nama: "Raudhatul Jannah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Mulawarman"},
+    {no: 35, nama: "Rifa Zahra Akhlisa Hasan", asal: "SMA Bina Insan Mandiri", jurusan: "Ilmu Komunikasi", universitas: "Universitas Teknologi Yogyakarta"},
+    {no: 36, nama: "Rifqi Naila Ulumiyah", asal: "SMA Bina Insan Mandiri", jurusan: "Hukum", universitas: "Universitas Islam Negeri Surabaya"},
+    {no: 37, nama: "Rinda Nia Malika", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Politeknik Banjarmasin"},
+    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Media"},
+    {no: 39, nama: "Salsabila Sayla Ramadhana", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Yogyakarta"},
+    {no: 40, nama: "Syarifatu Aliya", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Trunojoyo Madura"},
+    {no: 41, nama: "Tsabita Anisa Fawwaz", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
+    {no: 42, nama: "Samrotul Maghfiroh", asal: "SMA Bina Insan Mandiri", jurusan: "IPS", universitas: "Universitas Negeri Malang"},
+    {no: 43, nama: "Yumna Hanifah Nafisa Puspo Negoro", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Muhammadiyah Surakarta"},
+    {no: 44, nama: "Zahra Prawesti Nugraha", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Airlangga"},
+    {no: 45, nama: "Abdul Adhim", asal: "SMA Bina Insan Mandiri", jurusan: "Komunikasi & penyiaran islam", universitas: "Universitas Islam Negeri Jakarta"},
+    {no: 46, nama: "Akhmad Alfan Khoirul Rijal", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 47, nama: "Alfa Ramdhani Putro Surianto", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 48, nama: "Ammar Hafiz Rafi Syahputra", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Veteriner", universitas: "Universitas Airlangga"},
+    {no: 49, nama: "Avisenna Khalifa Ahmad", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Laboratorium Medik", universitas: "Universitas Airlangga"},
+    {no: 50, nama: "Bilal Akbar Mujahid", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 51, nama: "Faqih Fatihul Alam", asal: "SMA Bina Insan Mandiri", jurusan: "Peternakan", universitas: "Universitas Brawijaya"},
+    {no: 52, nama: "Fauzi Romadhoni", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Bahasa Arab", universitas: "UIN Maulana Malik Ibrahim Malang"},
+    {no: 53, nama: "Hamdan Zulfa", asal: "SMA Bina Insan Mandiri", jurusan: "Teknik Mesin", universitas: "PSDKU Poleteknik Negeri Malang"},
+    {no: 54, nama: "Juliansyah Aditya Al-Faris", asal: "SMA Bina Insan Mandiri", jurusan: "Peternakan", universitas: "Universitas Brawijaya"},
+    {no: 55, nama: "M. Fadhil Al Fikri", asal: "SMA Bina Insan Mandiri", jurusan: "Arsitektur", universitas: "Universitas Pendidikan Indonesia"},
+    {no: 56, nama: "M. Abyan Aqiil Bambang", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 57, nama: "Muh Syaddad Mubarak", asal: "SMA Bina Insan Mandiri", jurusan: "Sistem Informasi", universitas: "Amikom Yogyakarta"},
+    {no: 58, nama: "Muhammad Abdan Syakuur", asal: "SMA Bina Insan Mandiri", jurusan: "Keperawatan", universitas: "Universitas Lambung Mangkurat"},
+    {no: 59, nama: "Muhammad Alfareza", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 60, nama: "Muhammad Arjuna Zacky Zain", asal: "SMA Bina Insan Mandiri", jurusan: "Akuntansi", universitas: "PSDKU Uneversitas Negeri Surabaya"},
+    {no: 61, nama: "Muhammad Faaiz Taufiqurrahman.", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Universitas Negeri Surabaya"},
+    {no: 62, nama: "Muhammad Fawwaz Taufiqulhakim", asal: "SMA Bina Insan Mandiri", jurusan: "Teknik Informatika", universitas: "Universitas Negeri Surabaya"},
+    {no: 63, nama: "Muhammad Ghazy Farih Hibban", asal: "SMA Bina Insan Mandiri", jurusan: "Sastra Indonesia", universitas: "Universitas Negeri Malang"},
+    {no: 64, nama: "Muhammad Hafiz Al Kindi", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 65, nama: "Muhammad Haqqi Alfaqih", asal: "SMA Bina Insan Mandiri", jurusan: "(D4) Teknik Perkapalan", universitas: "Politeknik Perkapalan Negeri Surabaya"},
+    {no: 66, nama: "Muhammad Harist Khoirullah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
+    {no: 67, nama: "Muhammad Jundin Abdillah", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Bahasa Arab", universitas: "UIN Maulana Malik Ibrahim Malang"},
+    {no: 68, nama: "Muhammad Lutfi Ma'rifatullah", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen", universitas: "Universitas Nadhatul Ulama Surabaya"},
+    {no: 69, nama: "Muhammad Maulana Nuridduja", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen Pendidikan Islam", universitas: "Universitas Islam Negeri Samarinda"},
+    {no: 70, nama: "Muhammad Nurhafidz Eka Febrian", asal: "SMA Bina Insan Mandiri", jurusan: "Perawatan Mesin", universitas: "Politeknik Sinar Berau Coal"},
+    {no: 71, nama: "Muhammad Rifqi Arinal Haq", asal: "SMA Bina Insan Mandiri", jurusan: "Matematika", universitas: "Universitas Negeri Jember"},
+    {no: 72, nama: "Muhammad Salman Al Farisi", asal: "SMA Bina Insan Mandiri", jurusan: "Psikologi", universitas: "Universitas Negeri Surabaya"},
+    {no: 73, nama: "Muhammad Syams Youviansyah", asal: "SMA Bina Insan Mandiri", jurusan: "Matematika", universitas: "Universitas Negeri Yogyakarta"},
+    {no: 74, nama: "Muhammad Syamil Fauzan Nabil", asal: "SMA Bina Insan Mandiri", jurusan: "Peternakan", universitas: "Universitas Brawijaya"},
+    {no: 75, nama: "Muhammad Syauqi Ar Royyan", asal: "SMA Bina Insan Mandiri", jurusan: "Pertanian", universitas: "Universitas Trunojoyo"},
+    {no: 76, nama: "Muhammad Taqiyuddin", asal: "SMA Bina Insan Mandiri", jurusan: "Fisika", universitas: "UIN Syarif Hidayatullah"},
+    {no: 77, nama: "Muhammad Zaidan Ar-Rabbani Z.", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Informasi", universitas: "Universitas Brawijaya"},
+    {no: 78, nama: "Nabil Putra Nur Ramadhan", asal: "SMA Bina Insan Mandiri", jurusan: "Bahasa & Satra Arab", universitas: "UIN Maulana Malik Ibrahim Malang"},
+    {no: 79, nama: "Prio Rafi Musyaffa", asal: "SMA Bina Insan Mandiri", jurusan: "Peternakan", universitas: "Universitas Brawijaya"},
+    {no: 80, nama: "Rahmat Suryadi", asal: "SMA Bina Insan Mandiri", jurusan: "PGSD", universitas: "Universitas Negeri Malang"},
+    {no: 81, nama: "Sirhan Muzaffar Ramadhan", asal: "SMA Bina Insan Mandiri", jurusan: "(D4) Radiologi Teknologi Pencitraan", universitas: "Universitas Airlangga"},
+    {no: 82, nama: "Syah Ali Abdullah Qodim", asal: "SMA Bina Insan Mandiri", jurusan: "Hukum Keluarga Islam", universitas: "UIN Sayyid Ali Rahmatullah Tulungagung"},
+    {no: 83, nama: "Syahidan Fajar Wahid", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Pendidikan", universitas: "Universitas Negeri Surabaya"},
+    {no: 84, nama: "Taqiyuddin Zumar Alfaiz", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen", universitas: "Universitas Negeri Surabaya"},
+    {no: 85, nama: "Thariq Saif Mediteran", asal: "SMA Bina Insan Mandiri", jurusan: "Fisika", universitas: "Universitas Diponegoro"},
+    {no: 86, nama: "Umar Fatih Arkanuddin", asal: "SMA Bina Insan Mandiri", jurusan: "Tadris Matematika", universitas: "UIN Maulana Malik Ibrahim Malang"},
+    {no: 87, nama: "Zian Fadhil Mubarok", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Surabaya"}
 ];
+
+// Render Cards to Grid
+function renderCards(data) {
+    const grid = document.getElementById('alumniGrid');
+    grid.innerHTML = '';
+    
+    data.forEach(student => {
+        const card = document.createElement('div');
+        card.className = 'alumni-card neo-box';
+        card.innerHTML = `
+            <span class="badge-no neo-inset">#${student.no}</span>
+            <div class="alumni-info">
+                <h3>${student.nama}</h3>
+                <p>🏫 ${student.asal}</p>
+                <span class="major-badge">📚 ${student.jurusan && student.jurusan !== '-' ? student.jurusan : 'Belum ditentukan'}</span>
+                <p>🎓 <strong>${student.universitas && student.universitas !== '-' ? student.universitas : 'Belum ada info'}</strong></p>
+            </div>
+            <button class="neo-btn detail-card-btn" onclick="showDetail(${student.no}, '${student.nama.replace(/'/g, "\\'")}', '${student.jurusan.replace(/'/g, "\\'")}', '${student.universitas.replace(/'/g, "\\'")}')">Lihat Detail</button>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Initialize Cards on Load
+document.addEventListener('DOMContentLoaded', () => {
+    renderCards(studentsData);
+});
+
+// Search functionality
+function searchCards() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = studentsData.filter(s => 
+        s.nama.toLowerCase().includes(query) || 
+        s.jurusan.toLowerCase().includes(query) || 
+        s.universitas.toLowerCase().includes(query)
+    );
+    renderCards(filtered);
+}
+
+// Filter by Campus
+function filterByCampus(campus, btnElement) {
+    document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    if (campus === 'All') {
+        renderCards(studentsData);
+    } else {
+        const filtered = studentsData.filter(s => s.universitas.includes(campus));
+        renderCards(filtered);
+    }
+}
+
+// Login Logic
 function handleLogin(event) {
     event.preventDefault();
-    
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const loginBtn = document.querySelector('.login-btn');
-    const btnText = document.querySelector('.btn-text');
-    
-    // Simple validation (you can customize these credentials)
-    const validCredentials = [
-        {username: 'Admin', password: 'Admin201224'},
-        {username: 'Luminare', password: 'LuminareX'},
-        {username: 'IOS', password: 'IOSX'}
-    ];
-    
-    // Add loading animation
-    btnText.innerHTML = '<span class="loading"></span>Logging in...';
-    loginBtn.disabled = true;
-    
-    setTimeout(() => {
-        const isValid = validCredentials.some(cred => 
-            cred.username === username && cred.password === password
-        );
-        
-        if (isValid) {
-            // Success
-            btnText.innerHTML = 'Success!';
-            showSuccessMessage('Login berhasil! Selamat datang!');
-            
-            setTimeout(() => {
-                document.getElementById('loginOverlay').classList.add('hidden');
-                document.getElementById('mainContent').classList.add('visible');
-            }, 1000);
-        } else {
-            // Error
-            btnText.innerHTML = 'Login Failed';
-            alert('Username atau password salah! harus sesuai ketentuan yang sudah diberikan yaaa...\n\nJika ada kendala bisa langsung hubungi pemberi link web');
-            
-            setTimeout(() => {
-                btnText.innerHTML = 'Login';
-                loginBtn.disabled = false;
-            }, 2000);
-        }
-    }, 1500);
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+
+    const valid = [
+        {u: 'Admin', p: 'Admin201224'},
+        {u: 'Luminare', p: 'LuminareX'},
+        {u: 'IOS', p: 'IOSX'}
+    ].some(c => c.u === u && c.p === p);
+
+    if (valid) {
+        showSuccessMessage('Login berhasil! Selamat datang!');
+        setTimeout(() => {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainContent').classList.add('visible');
+        }, 800);
+    } else {
+        alert('Username atau password salah! Sesuai ketentuan ya gess...');
+    }
 }
 
 function togglePassword() {
-    const passwordInput = document.getElementById('password');
-    const toggleBtn = document.querySelector('.password-toggle');
-    
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleBtn.innerHTML = '🙈';
-    } else {
-        passwordInput.type = 'password';
-        toggleBtn.innerHTML = '👁️';
-    }
-}
-
-function closeLogin() {
-    // Allow closing but show warning
-    if (confirm('Anda yakin ingin keluar? Anda perlu login untuk mengakses data Mahasiswa.')) {
-        window.close();
-    }
-}
-
-function socialLogin(provider) {
-    alert(`Login dengan ${provider} akan segera tersedia!\n\nUntuk saat ini gunakan kredential yang sudah diberikan oleh pemberi link yaa`);
-}
-
-function forgotPassword() {
-    alert('gatau passwordnya??? coba deh tanya ke temen temen dulu');
-}
-
-function showSuccessMessage(message) {
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success-message';
-    successDiv.textContent = message;
-    document.body.appendChild(successDiv);
-    
-    setTimeout(() => {
-        successDiv.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        successDiv.classList.remove('show');
-        setTimeout(() => {
-            if (document.body.contains(successDiv)) {
-                document.body.removeChild(successDiv);
-            }
-        }, 300);
-    }, 3000);
-}
-
-// Navigation functions
-function navigateTo(page) {
-    switch(page) {
-        case 'home':
-            showSuccessMessage('Anda sudah berada di halaman Home!');
-            break;
-        case 'about':
-            alert('Tentang SMA Bina Insan Mandiri\n\n' +
-                  '🏫 Sekolah dan pondok yang berkomitmen menghasilkan lulusan berkualitas\n' +
-                  '📚 Program pendidikan unggulan\n' +
-                  '     -Reguler\n\n' +
-                  '     -Tahfidz\n\n' +
-                  '     -DKDM\n\n' +
-                  '🎓 Persiapan masuk perguruan tinggi terbaik\n' +
-                  '🏆 Prestasi akademik dan non-akademik di tingkat nasional maupun internasional');
-            break;
-        case 'services':
-            alert('Layanan SMA Bina Insan Mandiri:\n\n' +
-                  '• 🎯 Bimbingan Konseling\n' +
-                  '• 📖 Persiapan UTBK-SNBT\n' +
-                  '• 🎨 Ekstrakurikuler Beragam\n' +
-                  '• 💰 Program Beasiswa ke mesir\n' +
-                  '• 🌐 Fasilitas Modern\n' +
-                  '• 🔬 Laboratorium Lengkap');
-            break;
-        case 'contact':
-            alert('Kontak SMA Bina Insan Mandiri:\n\n' +
-                  '📞 Telepon: (0358) 772744\n' +
-                  '📧 Email: info@smabim.sch.id\n' +
-                  '🌐 Website: https://share.google/bowssuH0cJS9qkTz2\n' +
-                  '📍 Alamat: Kompleks Pondok Pesantren Al-Ihsan, Dsn. Baron\n' +
-                  '     Timur, Ds. Baron, Kec. Baron, Lobeser, Baron Nganjuk,Jawa Timur 64394\n\n');
-
-            break;
-    }
+    const pass = document.getElementById('password');
+    pass.type = pass.type === 'password' ? 'text' : 'password';
 }
 
 function logout() {
-    if (confirm('Anda yakin ingin logout?')) {
+    if (confirm('Yakin ingin logout?')) {
         document.getElementById('mainContent').classList.remove('visible');
-        document.getElementById('loginOverlay').classList.remove('hidden');
-        
-        // Reset form
+        document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('username').value = '';
         document.getElementById('password').value = '';
-        document.querySelector('.btn-text').innerHTML = 'Login';
-        document.querySelector('.login-btn').disabled = false;
-        document.getElementById('searchInput').value = '';
-        
-        // Reset password field type
-        document.getElementById('password').type = 'password';
-        document.querySelector('.password-toggle').innerHTML = '👁️';
-        
-        // Show all table rows
-        const table = document.getElementById('studentTable');
-        const rows = table.getElementsByTagName('tr');
-        for (let i = 1; i < rows.length; i++) {
-            rows[i].style.display = '';
-        }
-        
-        showSuccessMessage('Logout berhasil! Terima kasih!');
     }
 }
 
-// Search functionality
-function searchTable() {
-    const input = document.getElementById('searchInput');
-    const filter = input.value.toLowerCase();
-    const table = document.getElementById('studentTable');
-    const rows = table.getElementsByTagName('tr');
-    let visibleCount = 0;
-    
-    for (let i = 1; i < rows.length; i++) { // Skip header row
-        const cells = rows[i].getElementsByTagName('td');
-        let found = false;
-        
-        // Search in name, major, and university columns
-        if (cells.length > 1) {
-            const name = cells[1].textContent.toLowerCase();
-            const major = cells[3].textContent.toLowerCase();
-            const university = cells[4].textContent.toLowerCase();
-            
-            if (name.includes(filter) || major.includes(filter) || university.includes(filter)) {
-                found = true;
-                visibleCount++;
-            }
-        }
-        
-        rows[i].style.display = found ? '' : 'none';
-    }
-    
-    // Show search results count
-    if (filter && visibleCount === 0) {
-        showSearchMessage('Tidak ada data yang ditemukan untuk: ' + input.value);
-    } else if (filter && visibleCount > 0) {
-        showSearchMessage(`Ditemukan ${visibleCount} data untuk: ${input.value}`);
-    }
-}
-
-function showSearchMessage(message) {
-    // Remove existing search message
-    const existingMsg = document.querySelector('.search-message');
-    if (existingMsg) {
-        existingMsg.remove();
-    }
-    
-    const searchMsg = document.createElement('div');
-    searchMsg.className = 'success-message search-message';
-    searchMsg.textContent = message;
-    searchMsg.style.background = 'linear-gradient(45deg, #f39c12, #e67e22)';
-    document.body.appendChild(searchMsg);
-    
-    setTimeout(() => {
-        searchMsg.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        searchMsg.classList.remove('show');
-        setTimeout(() => {
-            if (document.body.contains(searchMsg)) {
-                document.body.removeChild(searchMsg);
-            }
-        }, 300);
-    }, 2000);
-}
-
-// Detail functionality
+// Detail Modal
 function showDetail(no, nama, jurusan, universitas) {
-    const isEmptyData = nama === '' || typeof nama === 'undefined';
-    if (isEmptyData) {
-        alert(`Detail Mahasiswa #${no}\n\n❌ Data tidak tersedia\n\nSlot ini masih kosong dan menunggu data mahasiswa baru.`);
-        return;
-    }
-
-    // Cari detail khusus di array
-    const detail = mahasiswaDetails.find(m => m.no == no);
-    if (detail) {
-        // Tampilkan detail khusus
-        let info = `=== 📋 DETAIL MAHASISWA ===\n\n`;
-        info += `📊 No Urut: ${detail.no}\n👩‍🎓 Nama Lengkap: ${detail.nama}\n`;
-        info += `🏫 Asal Sekolah: SMA Bina Insan Mandiri\n`;
-        info += `📚 Jurusan: ${detail.jurusan}\n`;
-        info += `🎓 Universitas: ${detail.universitas}\n`;
-        info += `\n=== 🏆 PRESTASI ===\n• ${detail.prestasi}\n`;
-        info += `\n=== 📱 KONTAK ===\n• ${detail.kontak}\n`;
-        info += `\n=== 🖼️ FOTO ===\n• ${detail.foto}\n`;
-        alert(info);
-        return;
-    }
-
-    // Default detail jika tidak ada data khusus
     const gender = no <= 44 ? 'Putri' : 'Putra';
-    const genderIcon = no <= 44 ? '👩‍🎓' : '👨‍🎓';
-    const detailInfo = `
-=== 📋 DETAIL MAHASISWA ===
-
-📊 No Urut: ${no}
-${genderIcon} Nama Lengkap: ${nama}
-🏫 Asal Sekolah: SMA Bina Insan Mandiri
-📚 Jurusan: ${jurusan === '-' ? 'Belum ditentukan' : jurusan}
-🎓 Universitas: ${universitas === '-' ? 'Belum ditentukan' : universitas}
-
-=== ℹ️ INFORMASI TAMBAHAN ===
-• Status: Mahasiswa Baru 2025
-• Tahun Lulus SMA: 2025
-• Tahun Masuk Kuliah: 2025
-• Kategori: ${gender}
-• Regional: ${getRegionalInfo(universitas)}
-
-=== 🏆 PRESTASI ===
-• Lulusan SMA Bina Insan Mandiri
-• Diterima di Perguruan Tinggi ${getUniversityType(universitas)}
-• Membanggakan Almamater
-
-💡 Tips: Semoga sukses dalam perjalanan akademis!
-`;
-    alert(detailInfo);
-}
-
-// Helper function to get regional information
-function getRegionalInfo(universitas) {
-    if (!universitas || universitas === '-') return 'Belum ditentukan';
-    
-    const regionalMap = {
-        'Airlangga': 'Jawa Timur',
-        'Malang': 'Jawa Timur',
-        'Jember': 'Jawa Timur',
-        'Surabaya': 'Jawa Timur',
-        'Trunojoyo': 'Jawa Timur',
-        'Diponegoro': 'Jawa Tengah',
-        'Surakarta': 'Jawa Tengah',
-        'Muhammadiyah Surakarta': 'Jawa Tengah',
-        'Yogyakarta': 'D.I. Yogyakarta',
-        'Bogor': 'Jawa Barat',
-        'Bandung': 'Jawa Barat',
-        'Pendidikan Indonesia': 'Jawa Barat',
-        'Jakarta': 'DKI Jakarta',
-        'Mulawarman': 'Kalimantan Timur',
-        'Banjarmasin': 'Kalimantan Selatan',
-        'Banyuwangi': 'Jawa Timur',
-        'Kudus': 'Jawa Tengah'
-    };
-    
-    for (const [key, region] of Object.entries(regionalMap)) {
-        if (universitas.includes(key)) {
-            return region;
-        }
-    }
-    
-    return 'Luar Jawa';
-}
-
-// Helper function to get university type
-function getUniversityType(universitas) {
-    if (!universitas || universitas === '-') return 'Belum ditentukan';
-    
-    if (universitas.includes('Universitas Negeri') || 
-        universitas.includes('Universitas Islam Negeri') ||
-        universitas.includes('Institut Pertanian Bogor')) {
-        return 'Negeri';
-    } else if (universitas.includes('Politeknik')) {
-        return 'Politeknik';
-    } else if (universitas.includes('Institut')) {
-        return 'Institut';
-    } else if (universitas.includes('Universitas Muhammadiyah') ||
-               universitas.includes('STEI')) {
-        return 'Swasta';
-    }
-    
-    return 'Terkemuka';
-}
-
-// Statistics functionality
-function showStatistics() {
-    const table = document.getElementById('studentTable');
-    const rows = table.getElementsByTagName('tr');
-    // Hitung statistik hanya untuk nomor urut unik 1-87
-    const noSet = new Set();
-    const femaleSet = new Set();
-    const maleSet = new Set();
-    let studentsWithMajor = 0;
-    let studentsWithUniversity = 0;
-    const universities = {};
-    const majors = {};
-    for (let i = 1; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName('td');
-        if (cells.length > 0) {
-            const no = parseInt(cells[0].textContent);
-            const nama = cells[1].textContent;
-            const major = cells[3].textContent;
-            const university = cells[4].textContent;
-            if (!isNaN(no) && no >= 1 && no <= 87 && nama.trim() !== "") {
-                noSet.add(no);
-                if (no <= 44) {
-                    femaleSet.add(no);
-                } else if (no >= 45 && no <= 87) {
-                    maleSet.add(no);
-                }
-                if (major && major !== '-') {
-                    studentsWithMajor++;
-                    majors[major] = (majors[major] || 0) + 1;
-                }
-                if (university && university !== '-') {
-                    studentsWithUniversity++;
-                    universities[university] = (universities[university] || 0) + 1;
-                }
-            }
-        }
-    }
-    const totalStudents = noSet.size;
-    const femaleStudents = femaleSet.size;
-    const maleStudents = maleSet.size;
-    const topUniversity = Object.keys(universities).reduce((a, b) => 
-        universities[a] > universities[b] ? a : b, Object.keys(universities)[0] || 'Tidak ada data');
-    const statsInfo = `
-=== 📊 STATISTIK MAHASISWA BARU 2025 ===
-SMA Bina Insan Mandiri
-
-👥 TOTAL MAHASISWA: ${totalStudents} orang
-
-
-🚻 BERDASARKAN GENDER:
-• Putri: ${femaleStudents} orang (${((femaleStudents/totalStudents)*100).toFixed(1)}%)
-• Putra: ${maleStudents} orang (${((maleStudents/totalStudents)*100).toFixed(1)}%)
-
-📚 STATUS JURUSAN:
-• Sudah menentukan: ${studentsWithMajor} orang
-• Belum menentukan: ${totalStudents - studentsWithMajor} orang
-
-🎓 STATUS UNIVERSITAS:
-• Sudah diterima: ${studentsWithUniversity} orang
-• Belum ada info: ${totalStudents - studentsWithUniversity} orang
-
-🏆 UNIVERSITAS TERFAVORIT:
-${topUniversity} (${universities[topUniversity] || 0} mahasiswa)
-
-📈 TINGKAT KELULUSAN: ${((studentsWithUniversity/totalStudents)*100).toFixed(1)}%
-
-🎯 TARGET 2025: Semua lulusan diterima di PT pilihan!
-`;
-    alert(statsInfo);
-}
-
-// Add keyboard shortcuts
-document.addEventListener('keydown', function(event) {
-    // Ctrl + F for search
-    if (event.ctrlKey && event.key === 'f') {
-        event.preventDefault();
-        document.getElementById('searchInput').focus();
-    }
-    
-    // Escape to clear search
-    if (event.key === 'Escape') {
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput.value) {
-            searchInput.value = '';
-            searchTable();
-            searchInput.blur();
-        }
-    }
-    
-    // Ctrl + S for statistics
-    if (event.ctrlKey && event.key === 's') {
-        event.preventDefault();
-        if (document.getElementById('mainContent').classList.contains('visible')) {
-            showStatistics();
-        }
-    }
-});
-
-// Add right-click context menu for table rows
-document.addEventListener('DOMContentLoaded', function() {
-    const table = document.getElementById('studentTable');
-    if (table) {
-        table.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-            
-            const row = event.target.closest('tr');
-            if (row && row.rowIndex > 0) { // Not header row
-                const cells = row.getElementsByTagName('td');
-                if (cells.length > 0) {
-                    const no = cells[0].textContent;
-                    const nama = cells[1].textContent;
-                    const jurusan = cells[3].textContent;
-                    const universitas = cells[4].textContent;
-                    
-                    const action = confirm(`Data untuk ${nama}\n\nKlik OK untuk melihat detail\nKlik Cancel untuk menyalin nama`);
-                    
-                    if (action) {
-                        showDetail(no, nama, jurusan, universitas);
-                    } else {
-                        // Copy name to clipboard
-                        navigator.clipboard.writeText(nama).then(() => {
-                            showSuccessMessage(`Nama "${nama}" telah disalin!`);
-                        });
-                    }
-                }
-            }
-        });
-    }
-});
-
-// Add export functionality
-function exportData(format) {
-    const table = document.getElementById('studentTable');
-    const rows = table.getElementsByTagName('tr');
-    let data = [];
-    
-    // Get headers
-    const headers = [];
-    const headerCells = rows[0].getElementsByTagName('th');
-    for (let cell of headerCells) {
-        if (cell.textContent !== 'Profile') { // Exclude Profile column
-            headers.push(cell.textContent);
-        }
-    }
-    data.push(headers);
-    
-    // Get data rows
-    for (let i = 1; i < rows.length; i++) {
-        if (rows[i].style.display !== 'none') { // Only visible rows
-            const rowData = [];
-            const cells = rows[i].getElementsByTagName('td');
-            for (let j = 0; j < cells.length - 1; j++) { // Exclude last column (Profile button)
-                rowData.push(cells[j].textContent);
-            }
-            data.push(rowData);
-        }
-    }
-    
-    if (format === 'csv') {
-        exportToCSV(data);
-    } else if (format === 'json') {
-        exportToJSON(data);
-    }
-}
-
-function exportToCSV(data) {
-    const csvContent = data.map(row => row.join(',')).join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'daftar_mahasiswa_2025.csv';
-    a.click();
-    showSuccessMessage('Data berhasil diekspor ke CSV!');
-}
-
-function exportToJSON(data) {
-    const [headers, ...rows] = data;
-    const jsonData = rows.map(row => {
-        const obj = {};
-        headers.forEach((header, index) => {
-            obj[header] = row[index];
-        });
-        return obj;
-    });
-    
-    const jsonContent = JSON.stringify(jsonData, null, 2);
-    const blob = new Blob([jsonContent], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'daftar_mahasiswa_2025.json';
-    a.click();
-    showSuccessMessage('Data berhasil diekspor ke JSON!');
-}
-
-// Initialize application
-document.addEventListener('DOMContentLoaded', function() {
-    // Add additional functionality buttons to navigation
-    const nav = document.querySelector('.navigation');
-    if (nav) {
-        const statsBtn = document.createElement('button');
-        statsBtn.textContent = 'Statistik';
-        statsBtn.className = 'btnLogin-popup';
-        statsBtn.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
-        statsBtn.onclick = showStatistics;
-        
-        const exportBtn = document.createElement('button');
-        exportBtn.textContent = 'Export';
-        exportBtn.className = 'btnLogin-popup';
-        exportBtn.style.background = 'linear-gradient(45deg, #9b59b6, #8e44ad)';
-        exportBtn.onclick = function() {
-            const format = confirm('Pilih format export:\nOK = CSV\nCancel = JSON') ? 'csv' : 'json';
-            exportData(format);
-        };
-        
-        // Insert before logout button
-        const logoutBtn = nav.querySelector('.btnLogin-popup');
-        nav.insertBefore(statsBtn, logoutBtn);
-        nav.insertBefore(exportBtn, logoutBtn);
-    }
-    
-    // Add help tooltip
-    const helpBtn = document.createElement('div');
-    helpBtn.innerHTML = '?';
-    helpBtn.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(45deg, #3498db, #2980b9);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-weight: bold;
-        z-index: 999;
-        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
-        transition: all 0.3s ease;
+    const detailHTML = `
+        <button class="close-detail" onclick="closeDetailPopup()">&times;</button>
+        <div style="text-align:center; margin-bottom: 15px;">
+            <div style="font-size: 40px;">🎓</div>
+            <h3 style="color:#2d3748; margin-top:5px;">${nama}</h3>
+        </div>
+        <hr style="border:0; border-top:1px solid #cbd5e0; margin:15px 0;">
+        <p>📊 <strong>No Urut:</strong> #${no} (${gender})</p>
+        <p>🏫 <strong>Asal Sekolah:</strong> SMA Bina Insan Mandiri</p>
+        <p>📚 <strong>Jurusan Kuliah:</strong> ${jurusan}</p>
+        <p>🎓 <strong>Universitas:</strong> ${universitas}</p>
+        <p style="margin-top:10px; font-size:12px; color:#718096; text-align:center;">💡 Sukses selalu di jenjang perkuliahan!</p>
     `;
-    
-    helpBtn.onclick = function() {
-        alert(`🎓 PANDUAN PENGGUNAAN SISTEM\n\n` +
-              `🔍 PENCARIAN:\n` +
-              `• Ketik nama/jurusan/universitas di kotak pencarian\n` +
-              `• Tekan Ctrl+F untuk fokus ke pencarian\n` +
-              `• Tekan Escape untuk menghapus pencarian\n\n` +
-              `📊 STATISTIK:\n` +
-              `• Klik tombol "Statistik" atau tekan Ctrl+S\n\n` +
-              `📋 DETAIL MAHASISWA:\n` +
-              `• Klik tombol "Detail" pada setiap baris\n` +
-              `• Klik kanan pada nama untuk opsi tambahan\n\n` +
-              `💾 EXPORT DATA:\n` +
-              `• Klik tombol "Export" untuk unduh data\n` +
-              `• Pilih format CSV atau JSON\n\n` +
-              `🎯 LOGIN CREDENTIALS:\n` +
-              `• admin/admin123\n` +
-              `• luminare/luminare2025\n` +
-              `• ios/ios2025`);
-    };
-    
-    helpBtn.onmouseover = function() {
-        this.style.transform = 'scale(1.1)';
-    };
-    
-    helpBtn.onmouseout = function() {
-        this.style.transform = 'scale(1)';
-    };
-    
-    document.body.appendChild(helpBtn);
-});
-
-// Add table sorting functionality
-function sortTable(columnIndex, dataType = 'text') {
-    const table = document.getElementById('studentTable');
-    const tbody = table.querySelector('tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
-    
-    // Toggle sort direction
-    const currentSort = table.getAttribute('data-sort-column');
-    const currentDirection = table.getAttribute('data-sort-direction') || 'asc';
-    const newDirection = (currentSort == columnIndex && currentDirection === 'asc') ? 'desc' : 'asc';
-    
-    rows.sort((a, b) => {
-        const aValue = a.cells[columnIndex].textContent.trim();
-        const bValue = b.cells[columnIndex].textContent.trim();
-        
-        let comparison = 0;
-        if (dataType === 'number') {
-            const aNum = parseInt(aValue) || 0;
-            const bNum = parseInt(bValue) || 0;
-            comparison = aNum - bNum;
-        } else {
-            comparison = aValue.localeCompare(bValue);
-        }
-        
-        return newDirection === 'asc' ? comparison : -comparison;
-    });
-    
-    // Re-append sorted rows
-    rows.forEach(row => tbody.appendChild(row));
-    
-    // Update sort indicators
-    table.setAttribute('data-sort-column', columnIndex);
-    table.setAttribute('data-sort-direction', newDirection);
-    
-    // Update header indicators
-    const headers = table.querySelectorAll('th');
-    headers.forEach((header, index) => {
-        header.classList.remove('sort-asc', 'sort-desc');
-        if (index === columnIndex) {
-            header.classList.add('sort-' + newDirection);
-        }
-    });
-    
-    if (columnIndex === 0) {
-        // Hitung hanya baris dengan angka valid di kolom No
-        // Hitung nomor urut unik 1-87
-        const noSet = new Set();
-        rows.forEach(row => {
-            const noCell = row.cells[0];
-            const namaCell = row.cells[1];
-            const no = parseInt(noCell && noCell.textContent);
-            if (
-                noCell &&
-                !isNaN(no) &&
-                no >= 1 && no <= 87 &&
-                namaCell &&
-                namaCell.textContent.trim() !== ""
-            ) {
-                noSet.add(no);
-            }
-        });
-        const jumlahData = noSet.size;
-        showSuccessMessage(`Tabel diurutkan berdasarkan No (1-${jumlahData})`);
-    } else {
-        showSuccessMessage(`Tabel diurutkan berdasarkan ${headers[columnIndex].textContent} (${newDirection === 'asc' ? 'A-Z' : 'Z-A'})`);
-    }
+    document.getElementById('detailInfo').innerHTML = detailHTML;
+    document.getElementById('detailOverlay').style.display = 'flex';
 }
 
-// Make table headers clickable for sorting
-document.addEventListener('DOMContentLoaded', function() {
-    const headers = document.querySelectorAll('#studentTable th');
-    headers.forEach((header, index) => {
-        if (index === 5) return; // Skip Profile column
-        
-        header.style.cursor = 'pointer';
-        header.title = 'Klik untuk mengurutkan';
-        
-        header.addEventListener('click', () => {
-            const dataType = index === 0 ? 'number' : 'text';
-            sortTable(index, dataType);
-        });
-    });
-});
+function closeDetailPopup() {
+    document.getElementById('detailOverlay').style.display = 'none';
+}
+
+function showSuccessMessage(msg) {
+    const div = document.createElement('div');
+    div.className = 'success-message';
+    div.textContent = msg;
+    document.body.appendChild(div);
+    setTimeout(() => div.classList.add('show'), 100);
+    setTimeout(() => {
+        div.classList.remove('show');
+        setTimeout(() => div.remove(), 300);
+    }, 2500);
+}
+
+function navigateTo(page) {
+    showSuccessMessage(`Navigasi ke halaman ${page}`);
+}
