@@ -37,7 +37,7 @@ const studentsData = [
     {no: 35, nama: "Rifa Zahra Akhlisa Hasan", asal: "SMA Bina Insan Mandiri", jurusan: "Ilmu Komunikasi", universitas: "Universitas Teknologi Yogyakarta"},
     {no: 36, nama: "Rifqi Naila Ulumiyah", asal: "SMA Bina Insan Mandiri", jurusan: "Hukum", universitas: "Universitas Islam Negeri Surabaya"},
     {no: 37, nama: "Rinda Nia Malika", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Politeknik Banjarmasin"},
-    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Media"},
+    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Rekayasa Media", universitas: "Politeknik Negri Media Kreatif"},
     {no: 39, nama: "Salsabila Sayla Ramadhana", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Yogyakarta"},
     {no: 40, nama: "Syarifatu Aliya", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Trunojoyo Madura"},
     {no: 41, nama: "Tsabita Anisa Fawwaz", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
