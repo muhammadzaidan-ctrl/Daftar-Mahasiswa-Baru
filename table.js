@@ -37,7 +37,7 @@ const studentsData = [
     {no: 35, nama: "Rifa Zahra Akhlisa Hasan", asal: "SMA Bina Insan Mandiri", jurusan: "Ilmu Komunikasi", universitas: "Universitas Teknologi Yogyakarta"},
     {no: 36, nama: "Rifqi Naila Ulumiyah", asal: "SMA Bina Insan Mandiri", jurusan: "Hukum", universitas: "Universitas Islam Negeri Surabaya"},
     {no: 37, nama: "Rinda Nia Malika", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Politeknik Banjarmasin"},
-    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Rekayasa Media", universitas: "Politeknik Negri Media Kreatif"},
+    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Media"},
     {no: 39, nama: "Salsabila Sayla Ramadhana", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Yogyakarta"},
     {no: 40, nama: "Syarifatu Aliya", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Trunojoyo Madura"},
     {no: 41, nama: "Tsabita Anisa Fawwaz", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
@@ -89,9 +89,21 @@ const studentsData = [
     {no: 87, nama: "Zian Fadhil Mubarok", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Surabaya"}
 ];
 
+// Cek Status Login Saat Halaman Dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    renderCards(studentsData);
+    
+    // Jika sebelumnya sudah pernah login di browser ini, langsung buka dashboard
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('mainContent').classList.add('visible');
+    }
+});
+
 // Render Cards to Grid
 function renderCards(data) {
     const grid = document.getElementById('alumniGrid');
+    if (!grid) return;
     grid.innerHTML = '';
     
     data.forEach(student => {
@@ -110,11 +122,6 @@ function renderCards(data) {
         grid.appendChild(card);
     });
 }
-
-// Initialize Cards on Load
-document.addEventListener('DOMContentLoaded', () => {
-    renderCards(studentsData);
-});
 
 // Search functionality
 function searchCards() {
@@ -140,6 +147,22 @@ function filterByCampus(campus, btnElement) {
     }
 }
 
+// Page Navigation Switcher (Tanpa Reload & Tanpa Login Ulang)
+function switchPage(pageId, event) {
+    event.preventDefault();
+    
+    document.querySelectorAll('.page-section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    document.getElementById('page-' + pageId).style.display = 'block';
+    document.getElementById('link-' + pageId).classList.add('active');
+}
+
 // Login Logic
 function handleLogin(event) {
     event.preventDefault();
@@ -153,6 +176,9 @@ function handleLogin(event) {
     ].some(c => c.u === u && c.p === p);
 
     if (valid) {
+        // Simpan status login ke browser session
+        sessionStorage.setItem('isLoggedIn', 'true');
+        
         showSuccessMessage('Login berhasil! Selamat datang!');
         setTimeout(() => {
             document.getElementById('loginOverlay').style.display = 'none';
@@ -170,6 +196,9 @@ function togglePassword() {
 
 function logout() {
     if (confirm('Yakin ingin logout?')) {
+        // Hapus status login
+        sessionStorage.removeItem('isLoggedIn');
+        
         document.getElementById('mainContent').classList.remove('visible');
         document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('username').value = '';
@@ -211,8 +240,4 @@ function showSuccessMessage(msg) {
         div.classList.remove('show');
         setTimeout(() => div.remove(), 300);
     }, 2500);
-}
-
-function navigateTo(page) {
-    showSuccessMessage(`Navigasi ke halaman ${page}`);
 }
