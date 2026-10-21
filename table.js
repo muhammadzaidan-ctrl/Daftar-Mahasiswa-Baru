@@ -1,9 +1,6 @@
 // Theme Toggle
 function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    document.querySelectorAll('.theme-btn').forEach(btn => {
-        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-    });
 }
 
 function toggleTheme() {
