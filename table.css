@@ -1,10 +1,27 @@
 :root {
     --bg-color: #e0e5ec;
     --text-color: #4a5568;
+    --heading-color: #2d3748;
+    --muted-color: #718096;
+    --divider-color: #cbd5e0;
+    --overlay-bg: rgba(224, 229, 236, 0.9);
     --shadow-light: #ffffff;
     --shadow-dark: #a3b1c6;
     --primary: #3182ce;
     --accent: #2b6cb0;
+}
+
+[data-theme="dark"] {
+    --bg-color: #2b2f3a;
+    --text-color: #cbd5e0;
+    --heading-color: #f7fafc;
+    --muted-color: #a0aec0;
+    --divider-color: #4a5568;
+    --overlay-bg: rgba(30, 33, 42, 0.9);
+    --shadow-light: #363b49;
+    --shadow-dark: #1e2129;
+    --primary: #63b3ed;
+    --accent: #4299e1;
 }
 
 * {
@@ -57,7 +74,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(224, 229, 236, 0.9);
+    background: var(--overlay-bg);
     backdrop-filter: blur(8px);
     z-index: 9999;
     display: flex;
@@ -75,12 +92,12 @@ body {
 
 .login-popup h2 {
     margin-bottom: 10px;
-    color: #2d3748;
+    color: var(--heading-color);
 }
 
 .login-popup p {
     font-size: 14px;
-    color: #718096;
+    color: var(--muted-color);
     margin-bottom: 25px;
 }
 
@@ -103,6 +120,7 @@ body {
     font-size: 14px;
     border: none;
     outline: none;
+    color: var(--text-color);
 }
 
 .password-toggle {
@@ -184,6 +202,7 @@ header {
     font-size: 16px;
     border: none;
     outline: none;
+    color: var(--text-color);
 }
 
 .filter-tags {
@@ -234,14 +253,14 @@ header {
 
 .alumni-info h3 {
     font-size: 18px;
-    color: #2d3748;
+    color: var(--heading-color);
     margin-bottom: 8px;
     padding-right: 25px;
 }
 
 .alumni-info p {
     font-size: 13px;
-    color: #718096;
+    color: var(--muted-color);
     margin-bottom: 5px;
 }
 
@@ -271,13 +290,13 @@ header {
 }
 
 .content-card h2 {
-    color: #2d3748;
+    color: var(--heading-color);
     margin-bottom: 15px;
     font-size: 24px;
 }
 
 .content-card p {
-    color: #4a5568;
+    color: var(--text-color);
     line-height: 1.7;
     margin-bottom: 20px;
     font-size: 15px;
@@ -338,7 +357,7 @@ header {
 
 .contact-item p {
     margin: 0;
-    color: #2d3748;
+    color: var(--heading-color);
     font-weight: 500;
 }
 
@@ -346,7 +365,7 @@ header {
 .detail-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(224, 229, 236, 0.8);
+    background: var(--overlay-bg);
     backdrop-filter: blur(5px);
     z-index: 3000;
     display: flex; align-items: center; justify-content: center;
@@ -365,14 +384,14 @@ header {
     top: 15px; right: 20px;
     background: none; border: none;
     font-size: 24px; cursor: pointer;
-    color: #718096;
+    color: var(--muted-color);
 }
 
 #detailInfo {
     text-align: left;
     font-size: 14px;
     line-height: 1.6;
-    color: #4a5568;
+    color: var(--text-color);
 }
 
 .success-message {
@@ -392,4 +411,23 @@ header {
 
 .success-message.show {
     transform: translateX(-50%) translateY(0);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    padding: 8px 12px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+.login-theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 10px;
+    font-size: 16px;
+}
+
+body, .neo-box, .neo-inset, .neo-btn {
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
