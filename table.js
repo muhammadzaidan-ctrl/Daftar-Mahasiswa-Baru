@@ -207,7 +207,11 @@ function handleLogin(event) {
 
 function togglePassword() {
     const pass = document.getElementById('password');
-    pass.type = pass.type === 'password' ? 'text' : 'password';
+    const btn = document.querySelector('.password-toggle');
+    const show = pass.type === 'password';
+
+    pass.type = show ? 'text' : 'password';
+    btn.classList.toggle('showing', show);
 }
 
 function logout() {
