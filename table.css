@@ -570,3 +570,69 @@ body, .neo-box, .neo-inset, .neo-btn {
     z-index: -1;
     pointer-events: none;
 }
+
+
+/* ========================================== */
+/* RESPONSIVE FIX UNTUK HP & LAPTOP           */
+/* ========================================== */
+
+/* Untuk Layar HP (Lebar maksimal 768px) */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 15px 10px; /* Mengurangi padding pinggir body agar lebih luas di HP */
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .navigation a {
+        margin: 0 8px;
+        font-size: 14px;
+    }
+
+    /* Ukuran grid kartu agar pas 1 kolom penuh atau grid kecil di HP */
+    .cards-grid {
+        grid-template-columns: 1fr; /* 1 kolom penuh di HP agar tidak terpotong */
+        gap: 15px;
+    }
+
+    .alumni-card {
+        padding: 20px;
+    }
+
+    /* Penyesuaian ukuran popup login & detail di HP */
+    .login-popup, .detail-popup {
+        padding: 25px 20px;
+        width: 92%;
+        max-width: 100%;
+    }
+
+    .controls-container {
+        padding: 15px;
+    }
+
+    .filter-tags {
+        justify-content: center;
+    }
+}
+
+/* Untuk Layar Laptop / Desktop (Lebar di atas 1024px) */
+@media screen and (min-width: 1024px) {
+    .main-content {
+        max-width: 1200px; /* Lebar maksimal konten utama di laptop */
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr); /* Pastikan pas 3 kolom rapi di laptop */
+    }
+}
