@@ -450,3 +450,43 @@ header {
 body, .neo-box, .neo-inset, .neo-btn {
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Theme Toggle */
+.theme-toggle {
+    padding: 8px 12px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+.login-theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 10px;
+    font-size: 16px;
+}
+
+body, .neo-box, .neo-inset, .neo-btn {
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== TAMBAHAN BARU ===== */
+.theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mode terang: tampilkan bulan, sembunyikan matahari */
+.theme-btn .icon-sun {
+    display: none;
+}
+
+/* Mode gelap: tampilkan matahari, sembunyikan bulan */
+[data-theme="dark"] .theme-btn .icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-btn .icon-sun {
+    display: block;
+}
