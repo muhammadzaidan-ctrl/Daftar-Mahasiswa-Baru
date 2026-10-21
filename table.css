@@ -492,3 +492,70 @@ body, .neo-box, .neo-inset, .neo-btn {
 [data-theme="dark"] .theme-btn .icon-sun {
     display: block;
 }
+
+.gallery-title {
+    margin-top: 40px;
+    color: var(--heading-color);
+    font-size: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.gallery-item p {
+    font-size: 13px;
+    margin: 10px 0 2px;
+    text-align: center;
+    color: var(--muted-color);
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 5000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    cursor: zoom-out;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 95%;
+    max-height: 80vh;
+    border-radius: 12px;
+}
+
+.lightbox p {
+    color: #fff;
+    margin-top: 15px;
+    font-size: 14px;
+}
