@@ -93,7 +93,6 @@ const studentsData = [
 document.addEventListener('DOMContentLoaded', () => {
     renderCards(studentsData);
     
-    // Jika sebelumnya sudah pernah login di browser ini, langsung buka dashboard
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainContent').classList.add('visible');
@@ -147,7 +146,7 @@ function filterByCampus(campus, btnElement) {
     }
 }
 
-// Page Navigation Switcher (Tanpa Reload & Tanpa Login Ulang)
+// Page Navigation Switcher
 function switchPage(pageId, event) {
     event.preventDefault();
     
@@ -176,7 +175,6 @@ function handleLogin(event) {
     ].some(c => c.u === u && c.p === p);
 
     if (valid) {
-        // Simpan status login ke browser session
         sessionStorage.setItem('isLoggedIn', 'true');
         
         showSuccessMessage('Login berhasil! Selamat datang!');
@@ -196,7 +194,6 @@ function togglePassword() {
 
 function logout() {
     if (confirm('Yakin ingin logout?')) {
-        // Hapus status login
         sessionStorage.removeItem('isLoggedIn');
         
         document.getElementById('mainContent').classList.remove('visible');
