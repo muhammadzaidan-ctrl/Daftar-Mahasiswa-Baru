@@ -104,10 +104,47 @@ const studentsData = [
     {no: 87, nama: "Zian Fadhil Mubarok", asal: "SMA Bina Insan Mandiri", jurusan: "Perencanaan Wilayah dan Kota", universitas: "Universitas Negeri Surabaya"}
 ];
 
+const galleryPhotos = [
+    { src: 'foto/angkatan-1.jpg', caption: 'Foto bersama angkatan' },
+    { src: 'foto/angkatan-2.jpg', caption: 'Kegiatan kelas' },
+    { src: 'foto/angkatan-3.jpg', caption: 'Perpisahan' }
+];
+
+function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    galleryPhotos.forEach(photo => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item neo-inset';
+        item.innerHTML = `
+            <img src="${photo.src}" alt="${photo.caption}" loading="lazy">
+            <p>${photo.caption}</p>
+        `;
+        item.onclick = () => openLightbox(photo.src, photo.caption);
+        grid.appendChild(item);
+    });
+}
+
+function openLightbox(src, caption) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxCaption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
 // Cek Status Login Saat Halaman Dimuat
 document.addEventListener('DOMContentLoaded', () => {
     applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
     renderCards(studentsData);
+    renderGallery();
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainContent').classList.add('visible');
