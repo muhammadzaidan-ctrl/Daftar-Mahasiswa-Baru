@@ -292,3 +292,94 @@ function showSuccessMessage(msg) {
         setTimeout(() => div.remove(), 300);
     }, 2500);
 }
+
+// Starfield: bintang jatuh di background
+(function initStarfield() {
+    const canvas = document.getElementById('starfield');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    const DIR_X = -0.45;   // arah miring ke kiri-bawah
+    const DIR_Y = 1;
+    const NORM = Math.hypot(DIR_X, DIR_Y);
+    
+    let w, h, stars = [];
+
+    function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        
+        const count = w < 600 ? 35 : 70;
+        stars = Array.from({ length: count }, () => createStar(true));
+    }
+
+    function createStar(initial) {
+        return {
+            x: Math.random() * (w + 300),
+            y: initial ? Math.random() * h : -Math.random() * 200 - 20,
+            len: 40 + Math.random() * 80,
+            speed: 1.5 + Math.random() * 3,
+            size: 0.8 + Math.random() * 1.6,
+            alpha: 0.4 + Math.random() * 0.6
+        };
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const rgb = dark ? '255, 255, 255' : '49, 130, 206';
+
+        stars.forEach(s => {
+            const tailX = s.x - (DIR_X / NORM) * s.len;
+            const tailY = s.y - (DIR_Y / NORM) * s.len;
+
+            const grad = ctx.createLinearGradient(s.x, s.y, tailX, tailY);
+            grad.addColorStop(0, `rgba(${rgb}, ${s.alpha})`);
+            grad.addColorStop(1, `rgba(${rgb}, 0)`);
+
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = s.size;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(s.x, s.y);
+            ctx.lineTo(tailX, tailY);
+            ctx.stroke();
+
+            ctx.fillStyle = `rgba(${rgb}, ${s.alpha})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+
+    function update() {
+        stars.forEach((s, i) => {
+            s.x += (DIR_X / NORM) * s.speed;
+            s.y += (DIR_Y / NORM) * s.speed;
+
+            if (s.y - s.len > h || s.x + s.len < 0) {
+                stars[i] = createStar(false);
+            }
+        });
+    }
+
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    if (reduceMotion) {
+        draw(); // Tampilkan statis jika pengguna mengaktifkan kurangi gerakan
+    } else {
+        loop();
+    }
+})();
