@@ -89,18 +89,18 @@ const studentsData = [
     {no: 87, nama: "Zian Fadhil Mubarok", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Surabaya"}
 ];
 
-// Inisialisasi Saat Dokumen Dimuat
+// Cek Status Login Saat Halaman Dimuat
 document.addEventListener('DOMContentLoaded', () => {
     renderCards(studentsData);
-    initCanvasBackground();
     
+    // Jika sebelumnya sudah pernah login di browser ini, langsung buka dashboard
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainContent').classList.add('visible');
     }
 });
 
-// Render Kartu Alumni ke Grid
+// Render Cards to Grid
 function renderCards(data) {
     const grid = document.getElementById('alumniGrid');
     if (!grid) return;
@@ -123,7 +123,7 @@ function renderCards(data) {
     });
 }
 
-// Pencarian Instan
+// Search functionality
 function searchCards() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const filtered = studentsData.filter(s => 
@@ -134,7 +134,7 @@ function searchCards() {
     renderCards(filtered);
 }
 
-// Filter Kampus
+// Filter by Campus
 function filterByCampus(campus, btnElement) {
     document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
     btnElement.classList.add('active');
@@ -147,16 +147,20 @@ function filterByCampus(campus, btnElement) {
     }
 }
 
-// Scrollytelling Smooth Scroll Navigation
-function scrollToSection(sectionId, event) {
+// Page Navigation Switcher (Tanpa Reload & Tanpa Login Ulang)
+function switchPage(pageId, event) {
     event.preventDefault();
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
     
-    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-    event.target.classList.add('active');
+    document.querySelectorAll('.page-section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    document.getElementById('page-' + pageId).style.display = 'block';
+    document.getElementById('link-' + pageId).classList.add('active');
 }
 
 // Login Logic
@@ -172,8 +176,10 @@ function handleLogin(event) {
     ].some(c => c.u === u && c.p === p);
 
     if (valid) {
+        // Simpan status login ke browser session
         sessionStorage.setItem('isLoggedIn', 'true');
-        showSuccessMessage('Login berhasil! Selamat datang di Portal Immersive!');
+        
+        showSuccessMessage('Login berhasil! Selamat datang!');
         setTimeout(() => {
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('mainContent').classList.add('visible');
@@ -189,8 +195,10 @@ function togglePassword() {
 }
 
 function logout() {
-    if (confirm('Yakin ingin keluar dari portal?')) {
+    if (confirm('Yakin ingin logout?')) {
+        // Hapus status login
         sessionStorage.removeItem('isLoggedIn');
+        
         document.getElementById('mainContent').classList.remove('visible');
         document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('username').value = '';
@@ -198,7 +206,7 @@ function logout() {
     }
 }
 
-// Modal Detail Alumni
+// Detail Modal
 function showDetail(no, nama, jurusan, universitas) {
     const gender = no <= 44 ? 'Putri' : 'Putra';
     const detailHTML = `
@@ -232,54 +240,4 @@ function showSuccessMessage(msg) {
         div.classList.remove('show');
         setTimeout(() => div.remove(), 300);
     }, 2500);
-}
-
-// Immersive Canvas Background Engine (Partikel Dinamis)
-function initCanvasBackground() {
-    const canvas = document.getElementById('immersiveCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    });
-
-    const particles = [];
-    const count = 45;
-
-    for (let i = 0; i < count; i++) {
-        particles.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 3 + 1,
-            color: Math.random() > 0.5 ? 'rgba(49, 130, 206, 0.25)' : 'rgba(163, 177, 198, 0.4)',
-            vx: (Math.random() - 0.5) * 0.6,
-            vy: (Math.random() - 0.5) * 0.6
-        });
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-
-            if (p.x < 0 || p.x > width) p.vx *= -1;
-            if (p.y < 0 || p.y > height) p.vy *= -1;
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
 }
