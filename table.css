@@ -130,7 +130,26 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: var(--muted-color);
+}
+
+.password-toggle:hover {
+    color: var(--primary);
+}
+
+.password-toggle .eye-open {
+    display: none;
+}
+
+.password-toggle.showing .eye-open {
+    display: block;
+}
+
+.password-toggle.showing .eye-closed {
+    display: none;
 }
 
 .login-btn {
