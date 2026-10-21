@@ -105,9 +105,7 @@ const studentsData = [
 ];
 
 const galleryPhotos = [
-    { src: 'foto/Luminare.jpg', caption: 'Foto Bersama Angkatan Luminare' },
-    { src: 'foto/angkatan-2.jpg', caption: 'Kegiatan kelas' },
-    { src: 'foto/angkatan-3.jpg', caption: 'Perpisahan' }
+    { src: 'foto/Luminare.jpg', caption: 'Foto Bersama Angkatan Luminare' }
 ];
 
 function renderGallery() {
