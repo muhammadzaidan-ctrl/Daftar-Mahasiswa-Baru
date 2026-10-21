@@ -1,4 +1,22 @@
+// Theme Toggle
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    applyTheme(next);
+}
+
+
 // Data Mahasiswa Lengkap (87 Siswa)
+
+
 const studentsData = [
     {no: 1, nama: "Adzkia Ar-rosyidah", asal: "SMA Bina Insan Mandiri", jurusan: "Matematika Murni", universitas: "Universitas Airlangga"},
     {no: 2, nama: "Agustin Wulandari", asal: "SMA Bina Insan Mandiri", jurusan: "Manajemen Pemasaran", universitas: "Universitas Negeri Malang"},
@@ -91,8 +109,8 @@ const studentsData = [
 
 // Cek Status Login Saat Halaman Dimuat
 document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
     renderCards(studentsData);
-    
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainContent').classList.add('visible');
@@ -210,14 +228,14 @@ function showDetail(no, nama, jurusan, universitas) {
         <button class="close-detail" onclick="closeDetailPopup()">&times;</button>
         <div style="text-align:center; margin-bottom: 15px;">
             <div style="font-size: 40px;">🎓</div>
-            <h3 style="color:#2d3748; margin-top:5px;">${nama}</h3>
+            <h3 style="color:var(--heading-color); margin-top:5px;">${nama}</h3>
         </div>
-        <hr style="border:0; border-top:1px solid #cbd5e0; margin:15px 0;">
+        <hr style="border:0; border-top:1px solid var(--divider-color); margin:15px 0;">
         <p>📊 <strong>No Urut:</strong> #${no} (${gender})</p>
         <p>🏫 <strong>Asal Sekolah:</strong> SMA Bina Insan Mandiri</p>
         <p>📚 <strong>Jurusan Kuliah:</strong> ${jurusan}</p>
         <p>🎓 <strong>Universitas:</strong> ${universitas}</p>
-        <p style="margin-top:10px; font-size:12px; color:#718096; text-align:center;">💡 Sukses selalu di jenjang perkuliahan!</p>
+        <p style="margin-top:10px; font-size:12px; color:var(--muted-color); text-align:center;">💡 Sukses selalu di jenjang perkuliahan!</p>
     `;
     document.getElementById('detailInfo').innerHTML = detailHTML;
     document.getElementById('detailOverlay').style.display = 'flex';
