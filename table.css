@@ -455,6 +455,7 @@ body, .neo-box, .neo-inset, .neo-btn {
 .theme-toggle {
     padding: 8px 12px;
     margin-left: 15px;
+    margin-right: 15px;
     font-size: 16px;
 }
 
