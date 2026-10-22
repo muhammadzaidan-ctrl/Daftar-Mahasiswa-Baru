@@ -167,7 +167,7 @@ function renderCards(data) {
     
     data.forEach((student, i) => {
         const card = document.createElement('div');
-        card.className = 'alumni-card neo-box';
+        card.className = 'alumni-card neo-box pre'; // Tambahkan class 'pre' langsung di sini
         card.innerHTML = `
             <span class="badge-no neo-inset">#${student.no}</span>
             <div class="alumni-info">
@@ -177,8 +177,10 @@ function renderCards(data) {
                 <p>🎓 <strong>${student.universitas && student.universitas !== '-' ? student.universitas : 'Belum ada info'}</strong></p>
             </div>
             <button class="neo-btn detail-card-btn" onclick="showDetail(${student.no}, '${student.nama.replace(/'/g, "\\'")}', '${student.jurusan.replace(/'/g, "\\'")}', '${student.universitas.replace(/'/g, "\\'")}')">Lihat Detail</button>`;
-        card.classList.add('pre');
-        card.style.animationDelay = `${(i % 3) * 80}ms`;
+        
+        // Berikan transition delay agar kartu muncul berurutan (satu per satu)
+        card.style.transitionDelay = `${(i % 3) * 100}ms`;
+        
         cardObserver.observe(card);
         grid.appendChild(card);
     });
