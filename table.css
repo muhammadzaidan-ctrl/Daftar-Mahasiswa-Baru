@@ -79,8 +79,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: var(--overlay-bg);
-    backdrop-filter: blur(8px);
+    background: transparent;
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -574,6 +573,8 @@ body, .neo-box, .neo-inset, .neo-btn {
     height: 100%;
     z-index: -1;
     pointer-events: none;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
 }
 
 
