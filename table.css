@@ -744,12 +744,13 @@ body, .neo-box, .neo-inset, .neo-btn {
 /* ===== Efek miring 3D kartu ===== */
 .alumni-card.neo-box {
     transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-    transition: transform 0.4s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease-out, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 .alumni-card.neo-box:hover {
     transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-5px);
-    transition: transform 0.12s ease-out, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease-out, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
