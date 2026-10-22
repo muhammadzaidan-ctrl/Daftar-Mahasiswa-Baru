@@ -155,6 +155,12 @@ const cardObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            
+            // PENTING: Hapus transition-delay agar efek tilt 3D kursor langsung merespons serentak
+            setTimeout(() => {
+                entry.target.style.transitionDelay = '0s';
+            }, 600);
+
             cardObserver.unobserve(entry.target);
         }
     });
@@ -513,7 +519,7 @@ function playAboutAnimations() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!canHover || reduce) return; // nonaktif di HP/tablet sentuh
 
-    const MAX_TILT = 8; // derajat, makin besar makin miring
+    const MAX_TILT = 7; // Di-set tepat di 7 derajat
     let activeCard = null;
     let pointer = { x: 0, y: 0 };
     let raf = null;
