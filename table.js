@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
     renderCards(studentsData);
     renderGallery();
+    renderCampusChart();
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainContent').classList.add('visible');
@@ -224,6 +225,8 @@ function switchPage(pageId, event) {
 
     document.getElementById('page-' + pageId).style.display = 'block';
     document.getElementById('link-' + pageId).classList.add('active');
+
+    if (pageId === 'about') playAboutAnimations();
 }
 
 // Login Logic
@@ -396,4 +399,155 @@ function showSuccessMessage(msg) {
     } else {
         loop();
     }
+})();
+
+// ===== Hitung sebaran kampus dari studentsData =====
+function normalizeCampus(name) {
+    if (!name || name.trim() === '' || name.trim() === '-') return null;
+
+    let n = name.trim()
+        .replace(/^PSDKU\s+/i, '')
+        .replace(/Uneversitas/i, 'Universitas');
+
+    const alias = {
+        'Universitas Trunojoyo Madura': 'Universitas Trunojoyo',
+        'UIN Maulana Malik Ibrahim Malang': 'UIN Malang',
+        'Universitas Islam Negeri Malang': 'UIN Malang',
+        'Universitas Islam Negeri Surabaya': 'UIN Surabaya'
+    };
+    return alias[n] || n;
+}
+
+function getCampusStats() {
+    const map = {};
+    let total = 0;
+    studentsData.forEach(s => {
+        const c = normalizeCampus(s.universitas);
+        if (!c) return;
+        map[c] = (map[c] || 0) + 1;
+        total++;
+    });
+    const sorted = Object.entries(map)
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    return { sorted, total };
+}
+
+function renderCampusChart() {
+    const box = document.getElementById('campusChart');
+    if (!box) return;
+
+    const { sorted, total } = getCampusStats();
+    const top = sorted.slice(0, 10);
+    const max = top.length ? top[0][1] : 1;
+
+    box.innerHTML = top.map(([name, count], i) => `
+        <div class="chart-row">
+            <span class="chart-label" title="${name}">${name}</span>
+            <div class="chart-track">
+                <div class="chart-fill" style="width:${(count / max * 100).toFixed(1)}%; transition-delay:${i * 70}ms"></div>
+            </div>
+            <span class="chart-value" data-to="${count}">0</span>
+        </div>
+    `).join('');
+
+    const note = document.getElementById('chartNote');
+    if (note) {
+        note.textContent = `Menampilkan ${top.length} kampus teratas dari ${sorted.length} kampus (${total} alumni yang sudah memiliki data kampus).`;
+    }
+}
+
+// ===== Animasi angka berhitung (satu loop untuk semua angka) =====
+let counterRaf = null;
+
+function runCounters(items, duration) {
+    if (counterRaf) cancelAnimationFrame(counterRaf);
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+        items.forEach(i => { i.el.textContent = i.to + i.suffix; });
+        return;
+    }
+
+    const start = performance.now();
+    function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+        items.forEach(i => {
+            i.el.textContent = Math.round(i.to * eased) + i.suffix;
+        });
+        if (t < 1) counterRaf = requestAnimationFrame(tick);
+    }
+    counterRaf = requestAnimationFrame(tick);
+}
+
+// Dipanggil setiap halaman About dibuka
+function playAboutAnimations() {
+    const items = [];
+
+    const total = document.getElementById('countAlumni');
+    if (total) items.push({ el: total, to: studentsData.length, suffix: '+' });
+
+    document.querySelectorAll('#campusChart .chart-value').forEach(el => {
+        items.push({ el: el, to: Number(el.dataset.to), suffix: '' });
+    });
+
+    runCounters(items, 1200);
+
+    // Reset batang ke 0 tanpa animasi, lalu jalankan animasi naik
+    const box = document.getElementById('campusChart');
+    if (box) {
+        box.classList.remove('run');
+        box.classList.add('no-anim');
+        void box.offsetWidth; // paksa browser menerapkan reset
+        box.classList.remove('no-anim');
+        box.classList.add('run');
+    }
+}
+
+// ===== Efek miring 3D kartu (event delegation, ringan) =====
+(function initTilt() {
+    const grid = document.getElementById('alumniGrid');
+    if (!grid) return;
+
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reduce) return; // nonaktif di HP/tablet sentuh
+
+    const MAX_TILT = 8; // derajat, makin besar makin miring
+    let activeCard = null;
+    let pointer = { x: 0, y: 0 };
+    let raf = null;
+
+    function resetCard(card) {
+        if (!card) return;
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+    }
+
+    function update() {
+        raf = null;
+        if (!activeCard) return;
+        const r = activeCard.getBoundingClientRect();
+        const px = (pointer.x - r.left) / r.width;
+        const py = (pointer.y - r.top) / r.height;
+        activeCard.style.setProperty('--ry', ((px - 0.5) * 2 * MAX_TILT).toFixed(2) + 'deg');
+        activeCard.style.setProperty('--rx', ((0.5 - py) * 2 * MAX_TILT).toFixed(2) + 'deg');
+    }
+
+    grid.addEventListener('pointermove', e => {
+        const card = e.target.closest('.alumni-card');
+        if (card !== activeCard) {
+            resetCard(activeCard);
+            activeCard = card;
+        }
+        if (!card) return;
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        if (!raf) raf = requestAnimationFrame(update);
+    });
+
+    grid.addEventListener('pointerleave', () => {
+        resetCard(activeCard);
+        activeCard = null;
+    });
 })();
