@@ -149,13 +149,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Observer untuk animasi kartu saat masuk layar
+const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            cardObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
 // Render Cards to Grid
 function renderCards(data) {
     const grid = document.getElementById('alumniGrid');
     if (!grid) return;
     grid.innerHTML = '';
     
-    data.forEach(student => {
+    data.forEach((student, i) => {
         const card = document.createElement('div');
         card.className = 'alumni-card neo-box';
         card.innerHTML = `
@@ -166,8 +176,10 @@ function renderCards(data) {
                 <span class="major-badge">📚 ${student.jurusan && student.jurusan !== '-' ? student.jurusan : 'Belum ditentukan'}</span>
                 <p>🎓 <strong>${student.universitas && student.universitas !== '-' ? student.universitas : 'Belum ada info'}</strong></p>
             </div>
-            <button class="neo-btn detail-card-btn" onclick="showDetail(${student.no}, '${student.nama.replace(/'/g, "\\'")}', '${student.jurusan.replace(/'/g, "\\'")}', '${student.universitas.replace(/'/g, "\\'")}')">Lihat Detail</button>
-        `;
+            <button class="neo-btn detail-card-btn" onclick="showDetail(${student.no}, '${student.nama.replace(/'/g, "\\'")}', '${student.jurusan.replace(/'/g, "\\'")}', '${student.universitas.replace(/'/g, "\\'")}')">Lihat Detail</button>`;
+        card.classList.add('pre');
+        card.style.animationDelay = `${(i % 3) * 80}ms`;
+        cardObserver.observe(card);
         grid.appendChild(card);
     });
 }
