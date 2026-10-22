@@ -1,3 +1,4 @@
+
 :root {
     --bg-color: #e0e5ec;
     --text-color: #4a5568;
@@ -641,4 +642,29 @@ body, .neo-box, .neo-inset, .neo-btn {
     .cards-grid {
         grid-template-columns: repeat(3, 1fr); /* Pastikan pas 3 kolom rapi di laptop */
     }
+}
+
+
+/* Animation Fade-in & Slide-up untuk Kartu Alumni */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alumni-card.pre {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.alumni-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
