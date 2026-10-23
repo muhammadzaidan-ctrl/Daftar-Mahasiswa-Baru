@@ -28,7 +28,7 @@ const studentsData = [
     {no: 11, nama: "Ghaniyyah Nayla Azmi", asal: "SMA Bina Insan Mandiri", jurusan: "PAI", universitas: "Universitas Islam Negeri Malang"},
     {no: 12, nama: "Halimah Kiysa Fiktim", asal: "SMA Bina Insan Mandiri", jurusan: "Teknik Komputer", universitas: "Universitas Pendidikan Indonesia"},
     {no: 13, nama: "Hamidatul Fitriah", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
-    {no: 14, nama: "Hilma Fatin Fikriah", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Negeri Malang"},
+    {no: 14, nama: "Hilma Fatin Fikriah", asal: "SMA Bina Insan Mandiri", jurusan: "Sistem Informasi Bisnis", universitas: "Politeknik Negeri Malang"},
     {no: 15, nama: "Hilma Nadaul Hasanah", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Biologi", universitas: "Universitas Negeri Malang"},
     {no: 16, nama: "Humairoh Azzahra", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Hasil Pertanian", universitas: "Universitas Mulawarman"},
     {no: 17, nama: "Kamila Fatin Hamizah", asal: "SMA Bina Insan Mandiri", jurusan: "PGPAUD", universitas: "Universitas Negeri Malang"},
@@ -52,13 +52,13 @@ const studentsData = [
     {no: 35, nama: "Rifa Zahra Akhlisa Hasan", asal: "SMA Bina Insan Mandiri", jurusan: "Ilmu Komunikasi", universitas: "Universitas Teknologi Yogyakarta"},
     {no: 36, nama: "Rifqi Naila Ulumiyah", asal: "SMA Bina Insan Mandiri", jurusan: "Hukum", universitas: "Universitas Islam Negeri Surabaya"},
     {no: 37, nama: "Rinda Nia Malika", asal: "SMA Bina Insan Mandiri", jurusan: "Bisnis Digital", universitas: "Politeknik Banjarmasin"},
-    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Politeknik Media"},
-    {no: 39, nama: "Salsabila Sayla Ramadhana", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Negeri Yogyakarta"},
-    {no: 40, nama: "Syarifatu Aliya", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Trunojoyo Madura"},
+    {no: 38, nama: "Sajida Zahia farin", asal: "SMA Bina Insan Mandiri", jurusan: "Teknologi Rekayasa Multimedia", universitas: "Politeknik Negeri Media Kreatif"},
+    {no: 39, nama: "Salsabila Sayla Ramadhana", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Bahasa dan Sastra Indonesia", universitas: "Universitas Negeri Yogyakarta"},
+    {no: 40, nama: "Syarifatu Aliya", asal: "SMA Bina Insan Mandiri", jurusan: "Agroekoteknologi", universitas: "Universitas Trunojoyo Madura"},
     {no: 41, nama: "Tsabita Anisa Fawwaz", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Airlangga"},
     {no: 42, nama: "Samrotul Maghfiroh", asal: "SMA Bina Insan Mandiri", jurusan: "IPS", universitas: "Universitas Negeri Malang"},
     {no: 43, nama: "Yumna Hanifah Nafisa Puspo Negoro", asal: "SMA Bina Insan Mandiri", jurusan: "Gizi", universitas: "Universitas Muhammadiyah Surakarta"},
-    {no: 44, nama: "Zahra Prawesti Nugraha", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "Universitas Airlangga"},
+    {no: 44, nama: "Zahra Prawesti Nugraha", asal: "SMA Bina Insan Mandiri", jurusan: "Pengobat Tradisional", universitas: "Universitas Airlangga"},
     {no: 45, nama: "Abdul Adhim", asal: "SMA Bina Insan Mandiri", jurusan: "Komunikasi & penyiaran islam", universitas: "Universitas Islam Negeri Jakarta"},
     {no: 46, nama: "Akhmad Alfan Khoirul Rijal", asal: "SMA Bina Insan Mandiri", jurusan: "Pendidikan Agama Islam", universitas: "Universitas Uluwiyah Mojokerto"},
     {no: 47, nama: "Alfa Ramdhani Putro Surianto", asal: "SMA Bina Insan Mandiri", jurusan: "-", universitas: "-"},
@@ -256,7 +256,7 @@ function handleLogin(event) {
             document.getElementById('mainContent').classList.add('visible');
         }, 800);
     } else {
-        alert('Username atau password salah! Sesuai ketentuan ya gess...');
+        alert('Username atau password salah! coba ingat lagi.');
     }
 }
 
